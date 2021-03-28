@@ -46,7 +46,7 @@ else
 fi
 
 GITHUBPROJECT="Circuit-Sword"
-GITHUBURL="https://github.com/kiteretro/$GITHUBPROJECT"
+GITHUBURL="https://github.com/666dsa666/$GITHUBPROJECT"
 PIHOMEDIR="$DEST/home/pi"
 BINDIR="$PIHOMEDIR/$GITHUBPROJECT"
 USER="pi"
@@ -124,8 +124,8 @@ fi
 # Copy required to /
 
 # Copy USB sound
-execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
-execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
+#execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
+#execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
 
 # Copy autostart
 if ! exists "$DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh" ; then
@@ -139,24 +139,24 @@ execute "chown $USER:$USER $DEST/opt/retropie/configs/all/autostart.sh"
 execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
 
 # Fix splashsreen sound
-if exists "$DEST/etc/init.d/asplashscreen" ; then
-  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
-fi
-if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
-  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
-fi
+#if exists "$DEST/etc/init.d/asplashscreen" ; then
+#  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
+#fi
+#if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
+#  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
+#fi
 
 # Fix audio
-if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
-  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
-fi
+#if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
+#  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
+#fi
 
 # Fix audio
-if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
-  execute "mkdir -p $PIHOMEDIR/.vice/"
-  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
-  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
-fi
+#if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
+#  execute "mkdir -p $PIHOMEDIR/.vice/"
+#  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
+#  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
+#fi
 
 # Install the pixel theme and set it as default
 if ! exists "$DEST/etc/emulationstation/themes/pixel/system/theme.xml" ; then
@@ -177,11 +177,11 @@ fi
 #fi
 
 # Install the reboot to hdmi scripts
-execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
-execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
-if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
-  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
-fi
+#execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
+#execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
+#if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
+#  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
+#fi
 
 # Enable 30sec autosave
 execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
@@ -190,23 +190,23 @@ execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/op
 execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
 
 # Remove wifi country disabler
-execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
+#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
 
 # Copy wifi firmware
-execute "cp $BINDIR/wifi-firmware/rtl* $DEST/lib/firmware/rtlwifi/"
+#execute "cp $BINDIR/wifi-firmware/rtl* $DEST/lib/firmware/rtlwifi/"
 
 # Install python-serial
 execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
 
 # Install rfkill
-execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
 
 # Install avrdude
 execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
 execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 
 # Install wiringPi
-execute "dpkg -x $BINDIR/settings/wiringpi_2.46_armhf.deb $DEST/"
+execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
 
 # Enable /ramdisk as a tmpfs (ramdisk)
 if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
