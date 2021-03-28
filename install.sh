@@ -136,8 +136,8 @@ execute "cp $BINDIR/settings/autostart.sh $DEST/opt/retropie/configs/all/autosta
 execute "chown $USER:$USER $DEST/opt/retropie/configs/all/autostart.sh"
 
 # Copy Splashscreens
-execute "cp $BINDIR/settings/GBZ_splashscreen_02.mp4 /home/pi/Retropie/splashscreens/GBZ_Kite.mp4"
-execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 /home/pi/Retropie/splashscreens/GBZ.mp4"
+execute "cp $BINDIR/settings/GBZ_splashscreen_02.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ_Kite.mp4"
+execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ.mp4"
 
 # Copy ES safe shutdown script
 execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
