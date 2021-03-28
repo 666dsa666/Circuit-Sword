@@ -210,7 +210,7 @@ execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
 execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 
 # Install wiringPi
-execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
 
 # Enable /ramdisk as a tmpfs (ramdisk)
 if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
