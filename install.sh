@@ -159,9 +159,9 @@ if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation
 fi
 
 # Enable /ramdisk as a tmpfs (ramdisk)
-#if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
-#  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
-#fi
+if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
+  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
+fi
 
 # Disable 'wait for network' on boot
 #execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
