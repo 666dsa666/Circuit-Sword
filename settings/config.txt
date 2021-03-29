@@ -33,13 +33,13 @@ overscan_scale=1
 avoid_warnings=2
 
 # Enable safe shutdown
-dtoverlay=gpio-poweroff,gpiopin=39,active_low="y"
+#dtoverlay=gpio-poweroff,gpiopin=39,active_low="y"
 
 # Disable onboard audio
 dtparam=audio=off
 
 # Enable SDIO wifi
-#dtoverlay=sdio,poll_once=false
+dtoverlay=sdio,poll_once=off
 
 # SD overclock (ONLY IF SD SUPPORTS IT)
 #dtoverlay=sdtweak,overclock_50=100
