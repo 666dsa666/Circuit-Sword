@@ -170,8 +170,8 @@ execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
 #execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
 
 # Copy USB sound
-#execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
-#execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
+execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
+execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
 
 # Copy autostart
 #if ! exists "$DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh" ; then
@@ -197,24 +197,24 @@ execute "apt-get install avrdude -y"
 #execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
 
 # Fix splashsreen sound
-#if exists "$DEST/etc/init.d/asplashscreen" ; then
-#  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
-#fi
-#if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
-#  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
-#fi
+if exists "$DEST/etc/init.d/asplashscreen" ; then
+  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
+fi
+if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
+  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
+fi
 
 # Fix audio
-#if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
-#  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
-#fi
+if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
+  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
+fi
 
 # Fix audio
-#if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
-#  execute "mkdir -p $PIHOMEDIR/.vice/"
-#  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
-#  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
-#fi
+if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
+  execute "mkdir -p $PIHOMEDIR/.vice/"
+  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
+  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
+fi
 
 # Remove the old service
 execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
