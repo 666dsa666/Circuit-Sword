@@ -164,7 +164,7 @@ if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
 fi
 
 # Disable 'wait for network' on boot
-#execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
+execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
 
 # Remove wifi country disabler
 #execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
@@ -183,12 +183,14 @@ fi
 
 # Install python-serial
 #execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
+execute "apt-get install python-serial -y"
 
 # Install rfkill
 #execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
 
 # Install avrdude
 #execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
+execute "apt-get install avrdude -y"
 #execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 
 # Install wiringPi
@@ -215,31 +217,30 @@ fi
 #fi
 
 # Remove the old service
-#execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
-#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-osd.service"
-#execute "rm -f $DEST/lib/systemd/system/cs-osd.service"
+execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
+execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-osd.service"
+execute "rm -f $DEST/lib/systemd/system/cs-osd.service"
 
 # Prepare for service install
-#execute "rm -f $DEST/etc/systemd/system/cs-hud.service"
-#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
-#execute "rm -f $DEST/lib/systemd/system/cs-hud.service"
+execute "rm -f $DEST/etc/systemd/system/cs-hud.service"
+execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
+execute "rm -f $DEST/lib/systemd/system/cs-hud.service"
 
-#execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
+execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
 
 # Install HUD service
-#execute "cp $BINDIR/cs-hud/cs-hud.service $DEST/lib/systemd/system/cs-hud.service"
-
-#execute "systemctl enable cs-hud.service"
-#execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/cs-hud.service"
-#execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
+execute "cp $BINDIR/cs-hud/cs-hud.service $DEST/lib/systemd/system/cs-hud.service"
+execute "systemctl enable cs-hud.service"
+execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/cs-hud.service"
+execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
 
 # Install DPI-CLONER service
-#execute "cp $BINDIR/dpi-cloner/dpi-cloner.service $DEST/lib/systemd/system/dpi-cloner.service"
+execute "cp $BINDIR/dpi-cloner/dpi-cloner.service $DEST/lib/systemd/system/dpi-cloner.service"
 
-#if [[ $DEST == "" ]] ; then
-#  execute "systemctl daemon-reload"
-#  execute "systemctl start cs-hud.service"
-#fi
+if [[ $DEST == "" ]] ; then
+  execute "systemctl daemon-reload"
+  execute "systemctl start cs-hud.service"
+fi
 
 #####################################################################
 # DONE
