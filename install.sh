@@ -110,15 +110,15 @@ execute "chown -R $USER:$USER $BINDIR"
 
 # Config.txt bits
 if ! exists "$DESTBOOT/config_ORIGINAL.txt" ; then
-  execute "cp $DESTBOOT/config.txt $DESTBOOT/config_ORIGINAL.txt"
-  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
+#  execute "cp $DESTBOOT/config.txt $DESTBOOT/config_ORIGINAL.txt"
+#  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
   execute "cp $BINDIR/settings/config-cs.txt $DESTBOOT/config-cs.txt"
 fi
 
 # Special case where config.txt has been updated on upgrade
-if [[ ! $(grep "CS CONFIG VERSION: 1.0" "$DESTBOOT/config.txt") ]] ; then
-  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
-fi
+#if [[ ! $(grep "CS CONFIG VERSION: 1.0" "$DESTBOOT/config.txt") ]] ; then
+#  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
+#fi
 
 #####################################################################
 # Copy required to /
