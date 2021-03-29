@@ -140,7 +140,7 @@ execute "cp $BINDIR/settings/GBZ_splashscreen_02.mp4 $PIHOMEDIR/RetroPie/splashs
 execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ.mp4"
 
 # Copy ES safe shutdown script
-execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
+#execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
 
 # Fix splashsreen sound
 #if exists "$DEST/etc/init.d/asplashscreen" ; then
@@ -172,20 +172,20 @@ if ! exists "$DEST/etc/emulationstation/themes/pixel/system/theme.xml" ; then
 fi
 
 # Install runcommand splash
-if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
-  execute "rm -rf /tmp/es-runcommand-splash"
-  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
-  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
-  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
-  execute "rm -rf /tmp/es-runcommand-splash"
-fi
+#if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
+#  execute "rm -rf /tmp/es-runcommand-splash"
+#  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
+#  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
+#  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
+#  execute "rm -rf /tmp/es-runcommand-splash"
+#fi
 
 # Install the reboot to hdmi scripts
-execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
-execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
-if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
-  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
-fi
+#execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
+#execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
+#if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
+#  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
+#fi
 
 # Enable 30sec autosave
 execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
@@ -218,16 +218,16 @@ execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 #fi
 
 # Remove the old service
-execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
-execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-osd.service"
-execute "rm -f $DEST/lib/systemd/system/cs-osd.service"
+#execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
+#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-osd.service"
+#execute "rm -f $DEST/lib/systemd/system/cs-osd.service"
 
 # Prepare for service install
-execute "rm -f $DEST/etc/systemd/system/cs-hud.service"
-execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
-execute "rm -f $DEST/lib/systemd/system/cs-hud.service"
+#execute "rm -f $DEST/etc/systemd/system/cs-hud.service"
+#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
+#execute "rm -f $DEST/lib/systemd/system/cs-hud.service"
 
-execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
+#execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
 
 # Install HUD service
 #execute "cp $BINDIR/cs-hud/cs-hud.service $DEST/lib/systemd/system/cs-hud.service"
