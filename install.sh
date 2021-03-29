@@ -200,14 +200,14 @@ execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/op
 #execute "cp $BINDIR/wifi-firmware/rtl* $DEST/lib/firmware/rtlwifi/"
 
 # Install python-serial
-execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
 
 # Install rfkill
 #execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
 
 # Install avrdude
-execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
-execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 
 # Install wiringPi
 #execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
