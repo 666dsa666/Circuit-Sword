@@ -37,7 +37,7 @@ if [ -f $CONFIGFILE ]; then
   if [[ "$CLONER" == "ON" ]] ; then
     if [[ $(tvservice -s | grep LCD) ]] ; then
       echo "Starting CLONER.."
-      sudo systemctl start dpi-cloner.service
+      #sudo systemctl start dpi-cloner.service
     fi
   fi
   
