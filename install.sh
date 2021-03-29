@@ -109,16 +109,16 @@ execute "chown -R $USER:$USER $BINDIR"
 # Copy required to /boot
 
 # Config.txt bits
-#if ! exists "$DESTBOOT/config_ORIGINAL.txt" ; then
-#  execute "cp $DESTBOOT/config.txt $DESTBOOT/config_ORIGINAL.txt"
-#  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
-#  execute "cp $BINDIR/settings/config-cs.txt $DESTBOOT/config-cs.txt"
-#fi
+if ! exists "$DESTBOOT/config_ORIGINAL.txt" ; then
+  execute "cp $DESTBOOT/config.txt $DESTBOOT/config_ORIGINAL.txt"
+  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
+  execute "cp $BINDIR/settings/config-cs.txt $DESTBOOT/config-cs.txt"
+fi
 
 # Special case where config.txt has been updated on upgrade
-#if [[ ! $(grep "CS CONFIG VERSION: 1.0" "$DESTBOOT/config.txt") ]] ; then
-#  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
-#fi
+if [[ ! $(grep "CS CONFIG VERSION: 1.0" "$DESTBOOT/config.txt") ]] ; then
+  execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
+<fi
 
 #####################################################################
 # Copy required to /
@@ -174,12 +174,12 @@ execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
 execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
 
 # Copy autostart
-#if ! exists "$DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh" ; then
-#  execute "mv $DEST/opt/retropie/configs/all/autostart.sh $DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh"
-#  execute "cp $BINDIR/settings/splashscreen.list $DEST/etc/splashscreen.list"
-#fi
-#execute "cp $BINDIR/settings/autostart.sh $DEST/opt/retropie/configs/all/autostart.sh"
-#execute "chown $USER:$USER $DEST/opt/retropie/configs/all/autostart.sh"
+if ! exists "$DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh" ; then
+  execute "mv $DEST/opt/retropie/configs/all/autostart.sh $DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh"
+  execute "cp $BINDIR/settings/splashscreen.list $DEST/etc/splashscreen.list"
+fi
+execute "cp $BINDIR/settings/autostart.sh $DEST/opt/retropie/configs/all/autostart.sh"
+execute "chown $USER:$USER $DEST/opt/retropie/configs/all/autostart.sh"
 
 # Install python-serial
 #execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
