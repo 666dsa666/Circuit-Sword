@@ -39,7 +39,7 @@ dtoverlay=gpio-poweroff,gpiopin=39,active_low="y"
 dtparam=audio=off
 
 # Enable SDIO wifi
-dtoverlay=sdio,poll_once=false
+#dtoverlay=sdio,poll_once=false
 
 # SD overclock (ONLY IF SD SUPPORTS IT)
 #dtoverlay=sdtweak,overclock_50=100
