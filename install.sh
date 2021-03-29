@@ -140,16 +140,16 @@ execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashs
 execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
 
 # Copy ES safe shutdown script
-#execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
+execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
 
 # Install runcommand splash
-#if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
-#  execute "rm -rf /tmp/es-runcommand-splash"
-#  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
-#  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
-#  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
-#  execute "rm -rf /tmp/es-runcommand-splash"
-#fi
+if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
+  execute "rm -rf /tmp/es-runcommand-splash"
+  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
+  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
+  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
+  execute "rm -rf /tmp/es-runcommand-splash"
+fi
 
 # Install the reboot to hdmi scripts
 #execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
