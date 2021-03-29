@@ -195,6 +195,7 @@ execute "apt-get install avrdude -y"
 
 # Install wiringPi
 #execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
+execute "apt-get install wiringpi -y"
 
 # Fix splashsreen sound
 if exists "$DEST/etc/init.d/asplashscreen" ; then
