@@ -229,18 +229,18 @@ execute "rm -f $DEST/lib/systemd/system/cs-hud.service"
 execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
 
 # Install HUD service
-execute "cp $BINDIR/cs-hud/cs-hud.service $DEST/lib/systemd/system/cs-hud.service"
-execute "systemctl enable cs-hud.service"
+#execute "cp $BINDIR/cs-hud/cs-hud.service $DEST/lib/systemd/system/cs-hud.service"
+#execute "systemctl enable cs-hud.service"
 #execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/cs-hud.service"
 #execute "ln -s $DEST/lib/systemd/system/cs-hud.service $DEST/etc/systemd/system/multi-user.target.wants/cs-hud.service"
 
 # Install DPI-CLONER service
-execute "cp $BINDIR/dpi-cloner/dpi-cloner.service $DEST/lib/systemd/system/dpi-cloner.service"
+#execute "cp $BINDIR/dpi-cloner/dpi-cloner.service $DEST/lib/systemd/system/dpi-cloner.service"
 
-if [[ $DEST == "" ]] ; then
-  execute "systemctl daemon-reload"
-  execute "systemctl start cs-hud.service"
-fi
+#if [[ $DEST == "" ]] ; then
+#  execute "systemctl daemon-reload"
+#  execute "systemctl start cs-hud.service"
+#fi
 
 #####################################################################
 # DONE
