@@ -123,6 +123,52 @@ execute "chown -R $USER:$USER $BINDIR"
 #####################################################################
 # Copy required to /
 
+# Install the pixel theme and set it as default
+if ! exists "$DEST/etc/emulationstation/themes/pixel/system/theme.xml" ; then
+  execute "mkdir -p $DEST/etc/emulationstation/themes"
+  execute "rm -rf $DEST/etc/emulationstation/themes/pixel"
+  execute "git clone --recursive --depth 1 --branch master https://github.com/krextra/es-theme-pixel.git $DEST/etc/emulationstation/themes/pixel"
+  execute "cp -p $BINDIR/settings/es_settings.cfg $DEST/opt/retropie/configs/all/emulationstation/es_settings.cfg"
+  execute "sed -i \"s/carbon/pixel/\" $DEST/opt/retropie/configs/all/emulationstation/es_settings.cfg"
+fi
+
+# Copy Splashscreens
+execute "cp $BINDIR/settings/GBZ_splashscreen_02.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ_Kite.mp4"
+execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ.mp4"
+
+# Enable 30sec autosave
+execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
+
+# Copy ES safe shutdown script
+#execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
+
+# Install runcommand splash
+#if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
+#  execute "rm -rf /tmp/es-runcommand-splash"
+#  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
+#  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
+#  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
+#  execute "rm -rf /tmp/es-runcommand-splash"
+#fi
+
+# Install the reboot to hdmi scripts
+#execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
+#execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
+#if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
+#  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
+#fi
+
+# Enable /ramdisk as a tmpfs (ramdisk)
+#if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
+#  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
+#fi
+
+# Disable 'wait for network' on boot
+#execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
+
+# Remove wifi country disabler
+#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
+
 # Copy USB sound
 #execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
 #execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
@@ -135,12 +181,18 @@ execute "chown -R $USER:$USER $BINDIR"
 #execute "cp $BINDIR/settings/autostart.sh $DEST/opt/retropie/configs/all/autostart.sh"
 #execute "chown $USER:$USER $DEST/opt/retropie/configs/all/autostart.sh"
 
-# Copy Splashscreens
-execute "cp $BINDIR/settings/GBZ_splashscreen_02.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ_Kite.mp4"
-execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashscreens/GBZ.mp4"
+# Install python-serial
+#execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
 
-# Copy ES safe shutdown script
-#execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
+# Install rfkill
+#execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
+
+# Install avrdude
+#execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
+#execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
+
+# Install wiringPi
+#execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
 
 # Fix splashsreen sound
 #if exists "$DEST/etc/init.d/asplashscreen" ; then
@@ -160,61 +212,6 @@ execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashs
 #  execute "mkdir -p $PIHOMEDIR/.vice/"
 #  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
 #  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
-#fi
-
-# Install the pixel theme and set it as default
-if ! exists "$DEST/etc/emulationstation/themes/pixel/system/theme.xml" ; then
-  execute "mkdir -p $DEST/etc/emulationstation/themes"
-  execute "rm -rf $DEST/etc/emulationstation/themes/pixel"
-  execute "git clone --recursive --depth 1 --branch master https://github.com/krextra/es-theme-pixel.git $DEST/etc/emulationstation/themes/pixel"
-  execute "cp -p $BINDIR/settings/es_settings.cfg $DEST/opt/retropie/configs/all/emulationstation/es_settings.cfg"
-  execute "sed -i \"s/carbon/pixel/\" $DEST/opt/retropie/configs/all/emulationstation/es_settings.cfg"
-fi
-
-# Install runcommand splash
-#if ! exists "$DEST/opt/retropie/configs/desktop/launching.png" ; then
-#  execute "rm -rf /tmp/es-runcommand-splash"
-#  execute "git clone --recursive --depth 1 --branch master https://github.com/ehettervik/es-runcommand-splash.git /tmp/es-runcommand-splash"
-#  execute "chown -R $USER:$USER /tmp/es-runcommand-splash"
-#  execute "cp -rp /tmp/es-runcommand-splash/* $DEST/opt/retropie/configs"
-#  execute "rm -rf /tmp/es-runcommand-splash"
-#fi
-
-# Install the reboot to hdmi scripts
-#execute "cp $BINDIR/settings/reboot_to_hdmi.sh $PIHOMEDIR/RetroPie/retropiemenu/reboot_to_hdmi.sh"
-#execute "cp -p $BINDIR/settings/reboot_to_hdmi.png $PIHOMEDIR/RetroPie/retropiemenu/icons/reboot_to_hdmi.png"
-#if [[ ! $(grep "reboot_to_hdmi" "$DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml") ]] ; then
-#  execute "sed -i 's|</gameList>|  <game>\n    <path>./reboot_to_hdmi.sh</path>\n    <name>One Time Reboot to HDMI</name>\n    <desc>Enable HDMI and automatically reboot for it to apply. The subsequent power cycle will revert back to the internal screen. It is normal when enabled for the internal screen to remain grey/white.</desc>\n    <image>/home/pi/RetroPie/retropiemenu/icons/reboot_to_hdmi.png</image>\n  </game>\n</gameList>|g' $DEST/opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml"
-#fi
-
-# Enable 30sec autosave
-execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
-
-# Disable 'wait for network' on boot
-#execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
-
-# Remove wifi country disabler
-#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
-
-# Copy wifi firmware
-#execute "cp $BINDIR/wifi-firmware/rtl* $DEST/lib/firmware/rtlwifi/"
-
-# Install python-serial
-#execute "dpkg -x $BINDIR/settings/python-serial_2.6-1.1_all.deb $DEST/"
-
-# Install rfkill
-#execute "dpkg -x $BINDIR/settings/rfkill_0.5-1_armhf.deb $DEST/"
-
-# Install avrdude
-#execute "dpkg -x $BINDIR/settings/avrdude_6.3+r1425-1+rpt1_armhf.deb $DEST/"
-#execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
-
-# Install wiringPi
-#execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
-
-# Enable /ramdisk as a tmpfs (ramdisk)
-#if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
-#  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
 #fi
 
 # Remove the old service
