@@ -124,8 +124,8 @@ fi
 # Copy required to /
 
 # Copy USB sound
-execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
-execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
+#execute "cp $BINDIR/settings/asound.conf $DEST/etc/asound.conf"
+#execute "cp $BINDIR/settings/alsa-base.conf $DEST/etc/modprobe.d/alsa-base.conf"
 
 # Copy autostart
 #if ! exists "$DEST/opt/retropie/configs/all/autostart_ORIGINAL.sh" ; then
@@ -143,24 +143,24 @@ execute "cp $BINDIR/settings/GBZ_splashscreen_04.mp4 $PIHOMEDIR/RetroPie/splashs
 execute "cp $BINDIR/settings/cs_shutdown.sh $DEST/opt/cs_shutdown.sh"
 
 # Fix splashsreen sound
-if exists "$DEST/etc/init.d/asplashscreen" ; then
-  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
-fi
-if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
-  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
-fi
+#if exists "$DEST/etc/init.d/asplashscreen" ; then
+#  execute "sed -i \"s/ *both/ alsa/\" $DEST/etc/init.d/asplashscreen"
+#fi
+#if exists "$DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh" ; then
+#  execute "sed -i \"s/ *both/ alsa/\" $DEST/opt/retropie/supplementary/splashscreen/asplashscreen.sh"
+#fi
 
 # Fix audio
-if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
-  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
-fi
+#if exists "$DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh" ; then
+#  execute "sed -i \"s/mupen64plus-audio-omx/mupen64plus-audio-sdl/\" $DEST/opt/retropie/emulators/mupen64plus/bin/mupen64plus.sh"
+#fi
 
- Fix audio
-if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
-  execute "mkdir -p $PIHOMEDIR/.vice/"
-  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
-  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
-fi
+# Fix audio
+#if ! exists "$PIHOMEDIR/.vice/sdl-vicerc" ; then
+#  execute "mkdir -p $PIHOMEDIR/.vice/"
+#  execute "echo 'SoundOutput=2' > $PIHOMEDIR/.vice/sdl-vicerc"
+#  execute "chown -R $USER:$USER $PIHOMEDIR/.vice/"
+#fi
 
 # Install the pixel theme and set it as default
 if ! exists "$DEST/etc/emulationstation/themes/pixel/system/theme.xml" ; then
@@ -191,10 +191,10 @@ fi
 execute "sed -i \"s/# autosave_interval =/autosave_interval = \"30\"/\" $DEST/opt/retropie/configs/all/retroarch.cfg"
 
 # Disable 'wait for network' on boot
-execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
+#execute "rm -f $DEST/etc/systemd/system/dhcpcd.service.d/wait.conf"
 
 # Remove wifi country disabler
-execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
+#execute "rm -f $DEST/etc/systemd/system/multi-user.target.wants/wifi-country.service"
 
 # Copy wifi firmware
 #execute "cp $BINDIR/wifi-firmware/rtl* $DEST/lib/firmware/rtlwifi/"
@@ -213,9 +213,9 @@ execute "dpkg -x $BINDIR/settings/libftdi1_0.20-4_armhf.deb $DEST/"
 #execute "dpkg -x $BINDIR/settings/wiringpi-latest.deb $DEST/"
 
 # Enable /ramdisk as a tmpfs (ramdisk)
-if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
-  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
-fi
+#if [[ $(grep '/ramdisk' $DEST/etc/fstab) == "" ]] ; then
+#  execute "echo 'tmpfs    /ramdisk    tmpfs    defaults,noatime,nosuid,size=100k    0 0' >> $DEST/etc/fstab"
+#fi
 
 # Remove the old service
 execute "rm -f $DEST/etc/systemd/system/cs-osd.service"
@@ -239,10 +239,10 @@ execute "rm -f $DEST/lib/systemd/system/dpi-cloner.service"
 # Install DPI-CLONER service
 #execute "cp $BINDIR/dpi-cloner/dpi-cloner.service $DEST/lib/systemd/system/dpi-cloner.service"
 
-if [[ $DEST == "" ]] ; then
-  execute "systemctl daemon-reload"
-  execute "systemctl start cs-hud.service"
-fi
+#if [[ $DEST == "" ]] ; then
+#  execute "systemctl daemon-reload"
+#  execute "systemctl start cs-hud.service"
+#fi
 
 #####################################################################
 # DONE
