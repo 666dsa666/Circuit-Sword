@@ -118,7 +118,7 @@ fi
 # Special case where config.txt has been updated on upgrade
 if [[ ! $(grep "CS CONFIG VERSION: 1.0" "$DESTBOOT/config.txt") ]] ; then
   execute "cp $BINDIR/settings/config.txt $DESTBOOT/config.txt"
-<fi
+fi
 
 #####################################################################
 # Copy required to /
